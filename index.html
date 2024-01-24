@@ -3,9 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="container">
+      <div id="input-container">
+        <h1 id="create-title">Create a Star-Wars character</h1>
+
+        <label class="flex-item">Id:</label>
+        <input id="id-input" class="flex-item" type="number" />
+
+        <label class="flex-item">Name:</label>
+        <input id="name-input" class="flex-item" type="text" />
+
+        <div id="good-div" class="flex-item">
+          <label class="flex-item">Good:</label>
+          <input id="good-input" type="checkbox" class="flex-item" />
+        </div>
+
+        <label class="flex-item">Species:</label>
+        <input id="species-input" type="text" class="flex-item" />
+
+        <label class="flex-item">Gender:</label>
+        <input id="gender-input" type="text" class="flex-item" />
+
+        <label class="flex-item">Height:</label>
+        <input id="height-input" class="flex-item" type="number" />
+
+        <label class="flex-item">Role:</label>
+        <input id="role-input" type="text" class="flex-item" />
+
+        <label class="flex-item">Image link:</label>
+        <input id="img-input" type="text" class="flex-item" />
+      </div>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>

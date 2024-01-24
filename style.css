@@ -1,3 +1,32 @@
+body {
+  background-color: aliceblue;
+}
+
 #container {
   display: flex;
+}
+
+#input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-style: solid;
+  padding: 10px;
+  background-color: lightskyblue;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#good-input {
+  text-align: center;
+}
+
+#good-div {
+  display: flex;
+}
+
+.flex-item {
+  margin: 3px;
+}
+
+#create-title {
 }

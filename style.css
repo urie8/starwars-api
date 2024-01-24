@@ -16,6 +16,14 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#characters-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: solid;
+  padding: 10px;
+}
+
 #good-input {
   text-align: center;
 }

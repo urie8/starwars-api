@@ -1,8 +1,21 @@
+let charactersContainer = document.querySelector("#characters-container");
+let idInput = document.querySelector("#id-input");
+let nameInput = document.querySelector("#name-input");
+let speciesInput = document.querySelector("#species-input");
+let genderInput = document.querySelector("#gender-input");
+let heightInput = document.querySelector("#height-input");
+let roleInput = document.querySelector("#role-input");
+let goodInput = document.querySelector("#good-input");
+let imgInput = document.querySelector("#img-input");
+
+let addCharBtn = document.querySelector("#add-char-btn");
+
 fetch("https://localhost:7279/api/Character").then((res) =>
   res.json().then((data) => console.log(data))
 );
 
 getCharacters();
+addCharBtn.addEventListener("click", addChar);
 
 function getCharacters() {
   fetch("https://localhost:7279/api/Character").then((res) =>
@@ -10,7 +23,46 @@ function getCharacters() {
   );
 }
 
-let charactersContainer = document.querySelector("#characters-container");
+function addChar() {
+  let newChar;
+  if (goodInput.checked) {
+    newChar = {
+      id: Number(idInput.value),
+      name: nameInput.value,
+      species: speciesInput.value,
+      gender: genderInput.value,
+      height: Number(heightInput.value),
+      role: roleInput.value,
+      img: imgInput.value,
+      good: true,
+    };
+  } else {
+    newChar = {
+      id: Number(idInput.value),
+      name: nameInput.value,
+      species: speciesInput.value,
+      gender: genderInput.value,
+      height: Number(heightInput.value),
+      role: roleInput.value,
+      img: imgInput.value,
+      good: false,
+    };
+  }
+
+  fetch("https://localhost:7279/api/Character", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newChar),
+  }).then((res) => {
+    if (res.ok) {
+      getCharacters();
+    } else {
+      console.warn("Something is wrong with the API!");
+    }
+  });
+}
 
 function displayCharacters(characters) {
   characters.forEach((c) => {

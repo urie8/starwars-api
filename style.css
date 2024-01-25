@@ -4,6 +4,7 @@ body {
 
 #container {
   display: flex;
+  margin: 10px;
 }
 
 #input-container {
@@ -22,6 +23,20 @@ body {
   flex-wrap: wrap;
   border: solid;
   padding: 10px;
+}
+
+.character {
+  display: flex;
+  flex: 1 0 300px;
+  flex-direction: column;
+  align-items: center;
+  border: solid;
+  margin: 10px;
+  background-color: lightskyblue;
+}
+
+.button {
+  margin: 10px;
 }
 
 #good-input {

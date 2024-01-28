@@ -9,6 +9,7 @@ let goodInput = document.querySelector("#good-input");
 let imgInput = document.querySelector("#img-input");
 
 let addCharBtn = document.querySelector("#add-char-btn");
+let deleteCharBtn = document.querySelector("#delete-char-btn");
 
 fetch("https://localhost:7279/api/Character").then((res) =>
   res.json().then((data) => console.log(data))
@@ -16,6 +17,13 @@ fetch("https://localhost:7279/api/Character").then((res) =>
 
 getCharacters();
 addCharBtn.addEventListener("click", addChar);
+
+const buttons = document.getElementsByClassName("delete-button");
+
+for (var i = 0; i < buttons.length; i++) {
+  console.log(buttons[i].id);
+  buttons[i].addEventListener("click", deleteChar(buttons[i].id));
+}
 
 function getCharacters() {
   fetch("https://localhost:7279/api/Character").then((res) =>
@@ -64,6 +72,21 @@ function addChar() {
   });
 }
 
+function deleteChar(id) {
+  fetch(`"https://localhost:7279/api/Character/${id}"`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      getCharacters();
+    } else {
+      console.warn("Something is wrong with the API!");
+    }
+  });
+}
+
 function displayCharacters(characters) {
   characters.forEach((c) => {
     if (c.isGood === true) {
@@ -74,6 +97,7 @@ function displayCharacters(characters) {
         <h3>Species: ${c.species}</h3>
         <h3>Height: ${c.height}m</h3>
         <h3>Role: ${c.role}</h3>
+        <button class="delete-button onclick="deleteChar( {{$id}} )" id="${c.id}">Delete</button>
     </div>`;
     } else {
       charactersContainer.innerHTML += `
@@ -83,6 +107,7 @@ function displayCharacters(characters) {
         <h3>Species: ${c.species}</h3>
         <h3>Height: ${c.height}</h3>
         <h3>Role: ${c.role}</h3>
+        <button class="delete-button" id="${c.id}">Delete</button>
     </div>`;
     }
   });

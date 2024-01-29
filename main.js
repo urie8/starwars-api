@@ -11,21 +11,15 @@ let imgInput = document.querySelector("#img-input");
 let addCharBtn = document.querySelector("#add-char-btn");
 let deleteCharBtn = document.querySelector("#delete-char-btn");
 
-fetch("https://localhost:7279/api/Character").then((res) =>
-  res.json().then((data) => console.log(data))
-);
+// fetch("https://localhost:7279/api/Character").then((res) =>
+//   res.json().then((data) => console.log(data))
+// );
 
 getCharacters();
 addCharBtn.addEventListener("click", addChar);
 
-const buttons = document.getElementsByClassName("delete-button");
-
-for (var i = 0; i < buttons.length; i++) {
-  console.log(buttons[i].id);
-  buttons[i].addEventListener("click", deleteChar(buttons[i].id));
-}
-
 function getCharacters() {
+  charactersContainer.innerHTML = "";
   fetch("https://localhost:7279/api/Character").then((res) =>
     res.json().then((data) => displayCharacters(data))
   );
@@ -73,7 +67,7 @@ function addChar() {
 }
 
 function deleteChar(id) {
-  fetch(`"https://localhost:7279/api/Character/${id}"`, {
+  fetch(`https://localhost:7279/api/Character/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -97,7 +91,7 @@ function displayCharacters(characters) {
         <h3>Species: ${c.species}</h3>
         <h3>Height: ${c.height}m</h3>
         <h3>Role: ${c.role}</h3>
-        <button class="delete-button onclick="deleteChar( {{$id}} )" id="${c.id}">Delete</button>
+        <button class="delete-button" id="${c.id}">Delete</button>
     </div>`;
     } else {
       charactersContainer.innerHTML += `
@@ -111,4 +105,16 @@ function displayCharacters(characters) {
     </div>`;
     }
   });
+
+  const buttons = document.getElementsByClassName("delete-button");
+  buttonsArray = Array.from(buttons);
+
+  for (var i = 0; i < buttons.length; i++) {
+    buttonsArray[i].addEventListener("click", handleDelete);
+    // deleteChar(buttonsArray[i].id
+  }
+}
+
+function handleDelete(e) {
+  deleteChar(e.target.id);
 }
